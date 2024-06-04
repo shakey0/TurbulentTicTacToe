@@ -59,7 +59,7 @@ patterns = {
             "drew {q} pretty cool reversed L{p}"
         ]
     },
-    'stumpy_t_shape': {
+    'stumpy_t': {
         'width': 3,
         'height': 2,
         'variants': "r0 r1 r2 r3",
@@ -71,11 +71,11 @@ patterns = {
             "constructed {q} T{p}"
         ]
     },
-    'lightning_shape': {
+    'short_lightning': {
         'width': 2,
         'height': 3,
         'variants': "r0 r1 f0 f1",
-        'coordinates': 'abde',
+        'coordinates': 'acdf',
         'messages': [
             "produced {q} powerful lightning strike{p} from the northwestern sky",
             "produced {q} powerful lightning bolt{p} from the western sky",
@@ -83,4 +83,70 @@ patterns = {
             "summoned {q} lightning bolt{p} from the east"
         ]
     },
+    'horseshoe': {
+        'width': 3,
+        'height': 2,
+        'variants': "r0 r1 r2 r3",
+        'coordinates': 'abcdf',
+        'messages': [
+            "crafted {q} sturdy horseshoe{p}",
+            "drew {q} slanted horseshoe{p}",
+            "stumbled upon {qv} upside down horseshoe{p}",
+            "crafted {q} brilliant horseshoe{p} on {t} side{p}"
+        ]
+    },
+    'turning_line': {
+        'width': 3,
+        'height': 3,
+        'variants': "r0 r1 r2 r3",
+        'coordinates': 'adghi',
+        'messages': [
+            "sighted and reported the hands of {q} clock{p} bang on 3 o'clock",
+            "sighted and reported the hands of {q} clock{p} at almost a quarter past 6",
+            "sighted and reported the hands of {q} clock{p} at almost a quarter to 9",
+            "sighted and reported the hands of {q} clock{p} bang on 9 o'clock"
+        ]
+    },
+    'zigzag_5': {
+        'width': 3,
+        'height': 3,
+        'variants': "r0 r1 r2 r3",
+        'coordinates': 'adehi',
+        'messages': [
+            "drew {q} sharp meandering zigzag{p} heading southeast",
+            "drew {q} sharp meandering zigzag{p} heading northeast",
+            "drew {q} sharp meandering zigzag{p} heading northwest",
+            "drew {q} sharp meandering zigzag{p} heading southwest"
+        ]
+    },
+    'funny_shape': {
+        'width': 3,
+        'height': 3,
+        'variants': "r0 r1 f0 f1",
+        'coordinates': 'abehi',
+        'messages': [
+            "came across {qv} indescribably funny shape{p} in {t} apparently original form{p}",
+            "came across {qv} indescribably funny shape{p} in {t} apparently first rotation{p}",
+            "came across {qv} indescribably funny shape{p} in {t} apparently reversed form{p}",
+            "came across {qv} indescribably funny shape{p} in {t} apparently most odd form{p}"
+        ]
+    },
+    'cross': {
+        'width': 3,
+        'height': 3,
+        'variants': "r0",
+        'coordinates': 'acegi',
+        'messages': [
+            "slammed down {q} powerful cross{pe}"
+        ]
+    },
+    'plus': {
+        'width': 3,
+        'height': 3,
+        'variants': "r0",
+        'coordinates': 'bdefh',
+        'messages': [
+            "made {q} powerful addition{p}"
+        ]
+    }
 }
