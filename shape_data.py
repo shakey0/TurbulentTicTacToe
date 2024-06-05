@@ -1,4 +1,4 @@
-patterns = {
+shapes_dict = {
     'standard_line': {
         'dimensions': "get_line",
         'variants': "r0 r1",
@@ -19,7 +19,7 @@ patterns = {
         'width': 2,
         'height': 2,
         'variants': "r0 e1",
-        'coordinates': 'abcd',
+        'coordinates': [(0, 0), (0, 1), (1, 0), (1, 1)],
         'messages': [
             "built {q} robust square{p}",
             "discovered the magic corners of {qv} almost invisible square{p}"
@@ -29,7 +29,7 @@ patterns = {
         'width': 3,
         'height': 3,
         'variants': "r0 e2",
-        'coordinates': 'bdfh',
+        'coordinates': [(0, 1), (1, 0), (1, 2), (2, 1)],
         'messages': [
             "dug up {q} shiny diamond{p}",
             "dug up from the ground the sparkling corners of {q} never before seen diamond{p}"
@@ -47,7 +47,7 @@ patterns = {
         'width': 2,
         'height': 3,
         'variants': "r0 r1 r2 r3 f0 f1 f2 f3",
-        'coordinates': 'acef',
+        'coordinates': [(0, 0), (1, 0), (2, 0), (2, 1)],
         'messages': [
             "made {q} perfect representation{p} of the letter L",
             "formed {q} rotated L{p}",

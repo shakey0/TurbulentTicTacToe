@@ -12,26 +12,22 @@ app.secret_key = os.environ.get('SECRET_KEY')
 
 @app.route('/')
 def index():
-    board = Board(6, 6)
+    board = Board(6, 6, shapes=['l_shape'])
     r.set(board.id, pickle.dumps(board), ex=3600)
     return render_template('index.html', board_data=board.board, board_id=board.id)
 
 
 @app.route('/move', methods=['POST'])
 def move():
-    player = 'X' # player = 'X' or 'O' or any other character
+    player = 'X' # player = 'X' or 'O' or any other character - a Player class will be implemented in the future
     data = request.json
     board_id = data.get('board_id')
     space = data.get('space')
     board = pickle.loads(r.get(board_id))
-    for y in range(board.height):
-        for x in range(board.width):
-            if board.board[y][x][0] == int(space):
-                board.board[y][x][1] = player
-                break
+    result = board.move(space, player)
     print('board:', board.board)
     r.set(board.id, pickle.dumps(board), ex=3600)
-    return jsonify({'success': True, 'player': player})
+    return jsonify({'success': True, 'player': player, 'result': result})
 
 
 if __name__ == '__main__':

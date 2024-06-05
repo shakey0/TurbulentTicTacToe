@@ -53,6 +53,7 @@
                     </div>
                 {% endfor %}
             </div>
+            <h2 class="result"></h2>
         </div>
     </body>
     <script>
@@ -75,7 +76,13 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        space.innerText = data.player;
+                        const result = document.querySelector('.result');
+                        if (data.result.success) {
+                            space.innerText = data.player;
+                            result.innerText = "Done!"
+                        } else {
+                            result.innerText = data.result.message;
+                        }
                     }
                 });
             });
