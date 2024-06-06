@@ -1,4 +1,4 @@
-from shape_data import shapes_dict
+from shape_data import shapes_dict, get_variant_conversion
 import secrets
 
 
@@ -35,17 +35,16 @@ class Board:
             print('Checking shape:', shape)
             shape_data = self.shapes[shape]
             if 'coordinates' in shape_data: # Might not need this if statement (or might)
-                print('Checking coordinates:', shape_data['coordinates'])
                 start_row = row - (shape_data['height'] - 1)
                 start_col = col - (shape_data['width'] - 1)
-                print('Start row:', start_row, 'Start col:', start_col)
                 footprints = []
+                for variant in shape_data['variants'].split():
+                    converted_coordinates = get_variant_conversion(variant, shape_data) # ALSO NEEDS TO GET THE NEW HEIGHT AND WIDTH
+                    print('Converted coordinates:', converted_coordinates)
                 for i in range(shape_data['height']):
                     for j in range(shape_data['width']):
-                        print('i:', i, 'j:', j)
                         footprint = [((start_row + y) + i, (start_col + x) + j) for y, x in shape_data['coordinates']]
                         if any(space[0] < 0 or space[0] >= self.height or space[1] < 0 or space[1] >= self.width for space in footprint):
-                            print('Out of bounds')
                             continue
                         footprints.append(footprint)
                 print('Footprints:', footprints)

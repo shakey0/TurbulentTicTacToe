@@ -150,3 +150,34 @@ shapes_dict = {
         ]
     }
 }
+
+def get_variant_conversion(variant, shape_data):
+    original_coordinates = shape_data['coordinates']
+    original_width = shape_data['width']
+    original_height = shape_data['height']
+    if variant == 'r0':
+        return original_coordinates
+    elif variant == 'r1':
+        return [(y, x) for x, y in original_coordinates] # NOT CORRECT, NOR ARE THE OTHERS
+    elif variant == 'r2':
+        return [(y, x) for x, y in reversed(original_coordinates)]
+    elif variant == 'r3':
+        return [(y, x) for x, y in reversed([(y, x) for x, y in original_coordinates])]
+    # elif variant == 'f0':
+    #     return [(y, x) for y, x in original_coordinates]
+    # elif variant == 'f1':
+    #     return [(y, x) for y, x in reversed(original_coordinates)]
+    # elif variant == 'f2':
+    #     return [(y, x) for y, x in reversed([(y, x) for y, x in original_coordinates])]
+    # elif variant == 'f3':
+    #     return [(y, x) for y, x in [(y, x) for y, x in reversed(original_coordinates)]]
+    # elif variant == 'e1':
+    #     return [(y, x) for y, x in [(y, x) for y, x in reversed(original_coordinates)]]
+    # elif variant == 'e2':
+    #     return [(y, x) for y, x in [(y, x) for y, x in original_coordinates]]
+    # elif variant == 'c0':
+    #     return [(y, x) for y, x in [(y, x) for y, x in original_coordinates]]
+    # elif variant == 'cr':
+    #     return [(y, x) for y, x in [(y, x) for y, x in reversed(original_coordinates)]]
+    else:
+        return None
