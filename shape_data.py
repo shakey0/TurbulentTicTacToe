@@ -152,32 +152,34 @@ shapes_dict = {
 }
 
 def get_variant_conversion(variant, shape_data):
-    original_coordinates = shape_data['coordinates']
     original_width = shape_data['width']
     original_height = shape_data['height']
+    original_coordinates = shape_data['coordinates']
+
+    def normalize_coordinates(coords):
+        min_x = min(x for x, y in coords)
+        min_y = min(y for x, y in coords)
+        return [(x - min_x, y - min_y) for x, y in coords]
+    
+    def flip_coordinates(coords):
+        return [(x, original_height - 1 - y) for x, y in coords]
+
     if variant == 'r0':
-        return original_coordinates
-    elif variant == 'r1':
-        return [(y, x) for x, y in original_coordinates] # NOT CORRECT, NOR ARE THE OTHERS
-    elif variant == 'r2':
-        return [(y, x) for x, y in reversed(original_coordinates)]
-    elif variant == 'r3':
-        return [(y, x) for x, y in reversed([(y, x) for x, y in original_coordinates])]
-    # elif variant == 'f0':
-    #     return [(y, x) for y, x in original_coordinates]
-    # elif variant == 'f1':
-    #     return [(y, x) for y, x in reversed(original_coordinates)]
-    # elif variant == 'f2':
-    #     return [(y, x) for y, x in reversed([(y, x) for y, x in original_coordinates])]
-    # elif variant == 'f3':
-    #     return [(y, x) for y, x in [(y, x) for y, x in reversed(original_coordinates)]]
-    # elif variant == 'e1':
-    #     return [(y, x) for y, x in [(y, x) for y, x in reversed(original_coordinates)]]
-    # elif variant == 'e2':
-    #     return [(y, x) for y, x in [(y, x) for y, x in original_coordinates]]
-    # elif variant == 'c0':
-    #     return [(y, x) for y, x in [(y, x) for y, x in original_coordinates]]
-    # elif variant == 'cr':
-    #     return [(y, x) for y, x in [(y, x) for y, x in reversed(original_coordinates)]]
-    else:
-        return None
+        rotated_coordinates = original_coordinates
+    elif variant == 'r1': # 90 degrees clockwise
+        rotated_coordinates = [(y, original_width - 1 - x) for x, y in original_coordinates]
+    elif variant == 'r2': # 180 degrees clockwise
+        rotated_coordinates = [(original_width - 1 - x, original_height - 1 - y) for x, y in original_coordinates]
+    elif variant == 'r3': # 270 degrees clockwise
+        rotated_coordinates = [(original_height - 1 - y, x) for x, y in original_coordinates]
+    elif variant == 'f0': # Flip horizontally
+        rotated_coordinates = flip_coordinates(original_coordinates)
+    elif variant == 'f1': # Flip horizontally and rotate 90 degrees clockwise
+        rotated_coordinates = [(y, original_width - 1 - x) for x, y in flip_coordinates(original_coordinates)]
+    elif variant == 'f2': # Flip horizontally and rotate 180 degrees clockwise
+        rotated_coordinates = [(original_width - 1 - x, original_height - 1 - y) for x, y in flip_coordinates(original_coordinates)]
+    elif variant == 'f3': # Flip horizontally and rotate 270 degrees clockwise
+        rotated_coordinates = [(original_height - 1 - y, x) for x, y in flip_coordinates(original_coordinates)]
+    # Add variants for e1, e2, c0, cr
+
+    return normalize_coordinates(rotated_coordinates)
