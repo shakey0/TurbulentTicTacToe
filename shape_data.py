@@ -151,10 +151,7 @@ shapes_dict = {
     }
 }
 
-def get_variant_conversion(variant, shape_data):
-    original_width = shape_data['width']
-    original_height = shape_data['height']
-    original_coordinates = shape_data['coordinates']
+def get_variant_conversion(variant, original_width, original_height, original_coordinates):
 
     def normalize_coordinates(coords):
         min_x = min(x for x, y in coords)
@@ -166,20 +163,28 @@ def get_variant_conversion(variant, shape_data):
 
     if variant == 'r0':
         rotated_coordinates = original_coordinates
+        width, height = original_width, original_height
     elif variant == 'r1': # 90 degrees clockwise
         rotated_coordinates = [(y, original_width - 1 - x) for x, y in original_coordinates]
+        width, height = original_height, original_width
     elif variant == 'r2': # 180 degrees clockwise
         rotated_coordinates = [(original_width - 1 - x, original_height - 1 - y) for x, y in original_coordinates]
+        width, height = original_width, original_height
     elif variant == 'r3': # 270 degrees clockwise
         rotated_coordinates = [(original_height - 1 - y, x) for x, y in original_coordinates]
+        width, height = original_height, original_width
     elif variant == 'f0': # Flip horizontally
         rotated_coordinates = flip_coordinates(original_coordinates)
+        width, height = original_width, original_height
     elif variant == 'f1': # Flip horizontally and rotate 90 degrees clockwise
         rotated_coordinates = [(y, original_width - 1 - x) for x, y in flip_coordinates(original_coordinates)]
+        width, height = original_height, original_width
     elif variant == 'f2': # Flip horizontally and rotate 180 degrees clockwise
         rotated_coordinates = [(original_width - 1 - x, original_height - 1 - y) for x, y in flip_coordinates(original_coordinates)]
+        width, height = original_width, original_height
     elif variant == 'f3': # Flip horizontally and rotate 270 degrees clockwise
         rotated_coordinates = [(original_height - 1 - y, x) for x, y in flip_coordinates(original_coordinates)]
+        width, height = original_height, original_width
     # Add variants for e1, e2, c0, cr
 
-    return normalize_coordinates(rotated_coordinates)
+    return width, height, normalize_coordinates(rotated_coordinates)

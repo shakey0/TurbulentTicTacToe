@@ -35,12 +35,14 @@ class Board:
             print('Checking shape:', shape)
             shape_data = self.shapes[shape]
             if 'coordinates' in shape_data: # Might not need this if statement (or might)
-                start_row = row - (shape_data['height'] - 1)
-                start_col = col - (shape_data['width'] - 1)
+                start_row = row - (shape_data['height'] - 1) # MOVE THIS LATER
+                start_col = col - (shape_data['width'] - 1) # MOVE THIS LATER
                 footprints = []
+                count = 0 # Increment this at the end of the loop
                 for variant in shape_data['variants'].split():
-                    converted_coordinates = get_variant_conversion(variant, shape_data) # ALSO NEEDS TO GET THE NEW HEIGHT AND WIDTH
-                    print('Converted coordinates:', converted_coordinates)
+                    width, height, coordinates = get_variant_conversion(variant, shape_data['width'], shape_data['height'], shape_data['coordinates'])
+                    print('Converted coordinates:', coordinates)
+                    print('Width:', width, 'Height:', height)
                 for i in range(shape_data['height']):
                     for j in range(shape_data['width']):
                         footprint = [((start_row + y) + i, (start_col + x) + j) for y, x in shape_data['coordinates']]
