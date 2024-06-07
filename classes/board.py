@@ -35,26 +35,25 @@ class Board:
             print('Checking shape:', shape)
             shape_data = self.shapes[shape]
             if 'coordinates' in shape_data: # Might not need this if statement (or might)
-                start_row = row - (shape_data['height'] - 1) # MOVE THIS LATER
-                start_col = col - (shape_data['width'] - 1) # MOVE THIS LATER
-                footprints = []
                 count = 0 # Increment this at the end of the loop
                 for variant in shape_data['variants'].split():
                     width, height, coordinates = get_variant_conversion(variant, shape_data['width'], shape_data['height'], shape_data['coordinates'])
+                    start_row, start_col = row - (height - 1), col - (width - 1)
+                    footprints = []
                     print('Converted coordinates:', coordinates)
                     print('Width:', width, 'Height:', height)
-                for i in range(shape_data['height']):
-                    for j in range(shape_data['width']):
-                        footprint = [((start_row + y) + i, (start_col + x) + j) for y, x in shape_data['coordinates']]
-                        if any(space[0] < 0 or space[0] >= self.height or space[1] < 0 or space[1] >= self.width for space in footprint):
-                            continue
-                        footprints.append(footprint)
-                print('Footprints:', footprints)
-                for footprint in footprints:
-                    if all(self.board[space[0]][space[1]][1] == player for space in footprint):
-                        print('Match')
-                        # Upon a match a class object will be created to store the winning shape data
-                        # The class object will be used to prevent previous matches from being counted again
-                    else:
-                        print('No match')
+                    for i in range(height):
+                        for j in range(width):
+                            footprint = [((start_row + y) + i, (start_col + x) + j) for y, x in coordinates]
+                            if any(space[0] < 0 or space[0] >= self.height or space[1] < 0 or space[1] >= self.width for space in footprint):
+                                continue
+                            footprints.append(footprint)
+                    print('Footprints:', footprints)
+                    for footprint in footprints:
+                        if all(self.board[space[0]][space[1]][1] == player for space in footprint):
+                            print('Match')
+                            # Upon a match a class object will be created to store the winning shape data
+                            # The class object will be used to prevent previous matches from being counted again
+                        else:
+                            print('No match')
             
