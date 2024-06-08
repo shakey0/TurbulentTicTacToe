@@ -55,5 +55,5 @@ class Board:
                             # Upon a match a class object will be created to store the winning shape data
                             # The class object will be used to prevent previous matches from being counted again
                         else:
-                            print('No match here')
+                            print('No match for this')
             
