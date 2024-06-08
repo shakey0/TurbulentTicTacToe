@@ -27,10 +27,10 @@ class Board:
         row, col = self.get_coordinates(space)
         if self.board[row][col][1] == '.':
             self.board[row][col][1] = player
-            self.check(row, col, player)
+            new_shapes = self.check(row, col, player)
         else:
             return {'success': False, 'message': 'Space already taken'} # Will implement method to check further
-        return {'success': True}
+        return {'success': True, 'new_shapes': new_shapes}
 
     def check(self, row, col, player):
         for shape in self.shapes:
