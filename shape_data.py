@@ -151,7 +151,7 @@ shapes_dict = {
     }
 }
 
-def get_variant_conversion(variant, original_width, original_height, original_coordinates):
+def get_variant_conversion(variant, original_width, original_height, original_coordinates, board_width, board_height):
 
     def normalize_coordinates(coords):
         min_x = min(x for x, y in coords)
